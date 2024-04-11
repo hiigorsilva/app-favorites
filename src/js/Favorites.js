@@ -60,11 +60,23 @@ export class FavoritesView extends Favorites {
 
   onadd() {
     const addButton = this.root.querySelector(".search button")
+    const inputField = this.root.querySelector(".search input")
+
     addButton.onclick = () => {
-      const { value } = this.root.querySelector(".search input")
+      const { value } = inputField
       
       this.add(value)
+      inputField.value = ""
     }
+
+    inputField.addEventListener("keydown", (event) => {
+      if(event.key === "Enter") {
+        const { value } = inputField
+
+        this.add(value)
+        inputField.value = ""
+      }
+    })
   }
 
   update() {
@@ -97,16 +109,18 @@ export class FavoritesView extends Favorites {
 
     tr.innerHTML = `
     <td class="user">
-      <img src="https://github.com/hiigorsilva.png" alt="Foto de Higor Silva">
-      <a href="https://github.com/hiigorsilva" target="_blank">
-        <p>Higor Silva</p>
-        <span>hiigorsilva</span>
+      <img src="https://github.com/" alt="">
+      <a href="https://github.com/" target="_blank" title="Visitar perfil">
+        <p></p>
+        <span></span>
       </a>
     </td>
-    <td class="repositories">76</td>
-    <td class="followers">95889</td>
+    <td class="repositories"></td>
+    <td class="followers"></td>
     <td>
-      <button class="btn-remove">&times;</button>
+      <button class="btn-remove" title="Excluir">
+        &times;
+      </button>
     </td>
     `
     return tr
